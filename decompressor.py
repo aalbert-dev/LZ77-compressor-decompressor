@@ -1,6 +1,4 @@
 import csv, sys, os, numpy, math, decimal
-from array import array
-from pprint import pprint
 """
 @author     Arjun Albert
 @email      aalbert@mit.edu
@@ -89,12 +87,12 @@ def decompress(s):
             compressed representation = [flag bit][offset bits][length bits][next char bits]
             compressed representation = [1 flag bit][12 bits for offset in dictionary of match][4 bits for length of match in dictionary][8 bits for the next character]
             """
-            offset_bits = s[cursor + 1: cursor + 13]
-            length_bits = s[cursor + 13: cursor + 17]
-            next_char_bits = s[cursor + 17: cursor + 25]
+            offset_bits = s[cursor + 1: cursor + 17]
+            length_bits = s[cursor + 17: cursor + 21]
+            next_char_bits = s[cursor + 21: cursor + 29]
             next_char = chr(get_decimal(next_char_bits, 2))
             parsed_str = decompress_match(offset_bits, length_bits, decompressed_str) + next_char
-            cursor += 25
+            cursor += 29
         decompressed_str += parsed_str
     return decompressed_str
 
