@@ -1,6 +1,4 @@
 import csv, sys, os, numpy, math, decimal
-from array import array
-from pprint import pprint
 """
 @author     Arjun Albert
 @email      aalbert@mit.edu
@@ -130,7 +128,7 @@ Convert a match (offset, length) and next character into 25 bits.
 Return the binary string.
 """
 def get_match_compressed_form(match, next_char):
-    return '1' + get_bits(match[0], 12) + get_bits(match[1], 4) + get_bits(ord(next_char), 8)
+    return '1' + get_bits(match[0], WINDOW_SIZE) + get_bits(match[1], 4) + get_bits(ord(next_char), 8)
 
 
 """
@@ -165,7 +163,7 @@ def compress(fname):
     lines = get_file_as_text(fname)
     chars = file_as_chars(lines)
     compressed_format = apply_sliding_window_compression(chars)
-    write_to_text_file('compressed_' + fname, compressed_format)
+    write_to_text_file('good_compressed_' + fname, compressed_format)
 
 
 """
